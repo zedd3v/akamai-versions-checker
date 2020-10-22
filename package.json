@@ -1,0 +1,14 @@
+{
+  "name": "akamai-versions-checker",
+  "version": "1.0.0",
+  "description": "Akamai Versions Checker",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "got": "^11.7.0"
+  }
+}
