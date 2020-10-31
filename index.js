@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 const got = require('got').default;
 const WEBSITES = require('./sites.json').sites;
 
