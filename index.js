@@ -1,6 +1,5 @@
-// @ts-nocheck
 const got = require('got').default;
-const WEBSITES = require('./sites.json').sites;
+const { sites: WEBSITES } = require('./sites.json');
 
 (async () => {
   WEBSITES.forEach(async (url) => {
@@ -24,6 +23,8 @@ const WEBSITES = require('./sites.json').sites;
 
     const scriptUrl = /\['_setAu', '(\/\w+\/\w+)'\]/i.exec(body);
 
+    if (!scriptUrl) return;
+
     const res = await got(`${url}${scriptUrl[1]}`, {
       https: {
         rejectUnauthorized: false,
@@ -42,9 +43,10 @@ const WEBSITES = require('./sites.json').sites;
       },
     });
 
-    console.log(
-      `${url}${scriptUrl[1]}`,
-      res.body.split('ver:')[1].split(',ke_cnt_lmt')[0]
-    );
+    const ver = res.body.split('ver:')[1]?.split(',ke_cnt_lmt')[0];
+
+    if (!ver) return;
+
+    console.log(`${url}${scriptUrl[1]}`, ver);
   });
 })();
